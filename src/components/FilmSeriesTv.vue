@@ -1,9 +1,16 @@
 <script>
+
 export default {
     name: 'FilmSeriesTv',
     props: {
         element: Object,
         index: String
+    },
+    data() {
+        return {
+            base_images_url: 'https://image.tmdb.org/t/p/',
+            size_images: 'w300'
+        }
     },
     methods: {
         getFlagClass(languageCode) {
@@ -45,12 +52,19 @@ export default {
         }
     }
 }
+
 </script>
 
 <template>
     <div class="col">
         <div class="card">
             <ul>
+                <li>
+                    <img v-if="element.poster_path == null"
+                        src="https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-thumbnail-graphic-illustration-vector-png-image_40966590.jpg"
+                        style="width: 100%;">
+                    <img v-else :src="base_images_url + size_images + element.poster_path" alt="">
+                </li>
                 <li v-if="index === 'films'">
                     <h3>
                         {{ element.title }}
@@ -70,7 +84,13 @@ export default {
                 <li>
                     <div :class="getFlagClass(element.original_language)"></div>
                 </li>
-                <li> {{ element.vote_average }}</li>
+                <li class="stars">
+                    <div v-for="i in 5" :key="i">
+                        <i v-if="Math.round(element.vote_average / 2) >= i" class="fa-solid fa-star"
+                            style="padding-right: 0.5rem;"></i>
+                        <i v-else class="fa-regular fa-star" style="padding-right: 0.5rem;"></i>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
@@ -79,6 +99,10 @@ export default {
 
 
 <style scoped>
+.stars {
+    display: flex;
+}
+
 ul {
     >li {
         list-style: none;

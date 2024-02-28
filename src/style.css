@@ -28,6 +28,7 @@ body {
         margin: 0 -1rem;
 
         [class^="col"] {
+
             padding: 1rem;
             width: 100%;
             border: 0.5px solid var(--boolflix-red);
@@ -35,9 +36,8 @@ body {
 
     }
 
-    @media (min-width:480px) {
-        width: 80%;
-        max-width: 420px;
+    @media (min-width:768px) {
+        max-width: 720px;
         margin: auto;
 
         & .row .col {
@@ -45,8 +45,8 @@ body {
         }
     }
 
-    @media (min-width:768px) {
-        max-width: 720px;
+    @media (min-width:1200px) {
+        max-width: 1120px;
 
         & .row .col {
             width: calc(100% / 3);
@@ -54,21 +54,11 @@ body {
 
     }
 
-    @media (min-width:1200px) {
-        max-width: 1176px;
+    @media (min-width:1600px) {
+        max-width: 1480px;
 
         & .row .col {
             width: calc(100% / 4);
-        }
-
-    }
-
-    @media (min-width:1440px) {
-
-        max-width: 1400px;
-
-        & .row .col {
-            width: calc(100% / 5);
         }
 
     }

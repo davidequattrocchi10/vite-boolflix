@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template>
-    <section>
+    <section :class='index + "section"'>
         <div class="container">
             <h2>
                 {{ index }}
@@ -32,6 +32,13 @@ export default {
 
 
 <style scoped>
+.filmssection,
+.seriesTvsection {
+
+    width: 100%;
+
+}
+
 h2 {
     text-transform: uppercase;
     padding: 1rem;
