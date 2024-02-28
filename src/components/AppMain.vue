@@ -23,13 +23,11 @@ export default {
 <template>
     <main>
         <div class="container">
-            <!-- Results number films -->
 
-
+            <!-- Loader until first search -->
             <div class="row" v-if="!state.loading">
                 <div v-if="state.error" class="try-again"> Try another search</div>
-                <!-- Cards -->
-                <FilmsCard v-else v-for="film in state.films" :key="film.id + '_film'" :films_card="film">
+                <FilmsCard v-else v-for="(dates, index) in state.results" :index="index" :dates="dates">
                 </FilmsCard>
             </div>
 
@@ -46,7 +44,7 @@ main {
     min-height: 200px;
 
     & .try-again {
-        color: red;
+        color: var(--boolflix-red);
         height: 150px;
         font-size: larger;
         padding: 1rem;

@@ -8,6 +8,7 @@
     --boolflix-dark: black;
     --boolflix-light: white;
     --boolflix-grey: #6c6c6cc2;
+    --boolflix-red: red;
 }
 
 body {
@@ -29,7 +30,7 @@ body {
         [class^="col"] {
             padding: 1rem;
             width: 100%;
-            border: 0.5px solid red;
+            border: 0.5px solid var(--boolflix-red);
         }
 
     }

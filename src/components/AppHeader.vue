@@ -13,17 +13,20 @@ export default {
     },
     methods: {
         searchResults(data) {
-            const searchFilm = data;
-            const url = state.base_api_url + searchFilm
-            console.log(url);
-            state.getFilms(url)
-            state.error = false
-        }
 
-    },
-    created() {
-        console.log(state.base_api_url)
-        state.getFilms(state.base_api_url);
+            const url_films = state.base_api_url_film + data;
+            const url_SeriesTv = state.base_api_url_series_tv + data;
+
+            Promise
+                .all([state.getFilms(url_films), state.getSeriesTv(url_SeriesTv)])
+                .then(([films, seriesTv]) => {
+                    state.results.films = films.data
+                    state.results.seriesTv = seriesTv.data
+                    state.loading = false;
+                    console.log(state.results.films);
+                    console.log(state.results.seriesTv);
+                })
+        },
 
     },
     components: {

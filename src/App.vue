@@ -6,6 +6,7 @@ import AppFooter from './components/AppFooter.vue'
 
 
 
+
 export default {
   name: 'App.vue',
   components: {
