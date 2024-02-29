@@ -9,11 +9,13 @@ export default {
     data() {
         return {
             base_images_url: 'https://image.tmdb.org/t/p/',
-            size_images: 'w300'
+            size_images: 'w342',
+            hover: false,
         }
     },
     methods: {
         getFlagClass(languageCode) {
+
             const lowercaseLanguageCode = languageCode.toLowerCase();
             const flagIconClasses = [
                 'us',
@@ -49,7 +51,7 @@ export default {
             } else {
                 return 'flag-icon flag-icon-unknown';
             }
-        }
+        },
     }
 }
 
@@ -58,40 +60,49 @@ export default {
 <template>
     <div class="col">
         <div class="card">
-            <ul>
-                <li>
-                    <img v-if="element.poster_path == null"
-                        src="https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-thumbnail-graphic-illustration-vector-png-image_40966590.jpg"
-                        style="width: 100%;">
-                    <img v-else :src="base_images_url + size_images + element.poster_path" alt="">
-                </li>
-                <li v-if="index === 'films'">
-                    <h3>
-                        {{ element.title }}
-                    </h3>
-                    <h6>{{ element.original_title }}</h6>
+            <div>
+                <img v-if="element.poster_path == null"
+                    src="https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-thumbnail-graphic-illustration-vector-png-image_40966590.jpg"
+                    style="width: 100%;">
+                <img v-else :src="base_images_url + size_images + element.poster_path" alt="">
+            </div>
+            <div class="card-hide">
+                <ul>
+                    <li v-if="index === 'films'">
+                        <h3>
+                            Title: {{ element.title }}
+                        </h3>
+                        <h3 v-show="element.title != element.original_title">
+                            Original title: {{ element.original_title }}
+                        </h3>
 
-                </li>
-                <li v-else>
+                    </li>
+                    <li v-else>
+                        <h3>
+                            Title: {{ element.name }}
+                        </h3>
+                        <h3 v-show="element.name != element.original_name">
+                            Original title: {{ element.original_name }}
+                        </h3>
+                    </li>
+                    <li class="stars">
+                        <h3 style="padding-right:0.5rem;"> Language: </h3>
+                        <div :class="getFlagClass(element.original_language)"> </div>
+                    </li>
+                    <li class="stars">
+                        <h3 style="padding-right:0.5rem;"> Vote: </h3>
+                        <div v-for=" i in 5" :key="i">
+                            <i v-if="Math.round(element.vote_average / 2) >= i" class="fa-solid fa-star"
+                                style="padding-right: 0.5rem;"></i>
+                            <i v-else class="fa-regular fa-star" style="padding-right: 0.5rem;"></i>
+                        </div>
+                    </li>
+                    <li>
+                        <h3> Overview: {{ element.overview.substring(0, 300) }} ... </h3>
+                    </li>
+                </ul>
+            </div>
 
-                    <h3>
-                        {{ element.name }}
-                    </h3>
-                    <h6>
-                        {{ element.original_name }}
-                    </h6>
-                </li>
-                <li>
-                    <div :class="getFlagClass(element.original_language)"></div>
-                </li>
-                <li class="stars">
-                    <div v-for="i in 5" :key="i">
-                        <i v-if="Math.round(element.vote_average / 2) >= i" class="fa-solid fa-star"
-                            style="padding-right: 0.5rem;"></i>
-                        <i v-else class="fa-regular fa-star" style="padding-right: 0.5rem;"></i>
-                    </div>
-                </li>
-            </ul>
         </div>
     </div>
 </template>
@@ -99,8 +110,50 @@ export default {
 
 
 <style scoped>
+.card {
+    position: relative;
+    min-width: 100%;
+    height: 100%;
+
+    & div {
+        height: 100%;
+
+        & img {
+            width: 100%;
+            min-height: 100%;
+        }
+
+    }
+
+
+
+
+}
+
+.card:hover img {
+    opacity: 0.2;
+}
+
+.card-hide {
+    position: absolute;
+    display: none;
+    height: 80%;
+    width: 100%;
+    padding: 5px;
+    top: 8px;
+    left: 0;
+
+}
+
+.card:hover .card-hide {
+    display: block;
+    /* @mouseover="showInfo" @mouseleave="hideInfo" */
+}
+
 .stars {
     display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 ul {
@@ -111,10 +164,6 @@ ul {
         >h3 {
             font-size: large;
             padding: 0.5rem 0;
-        }
-
-        >h6 {
-            font-size: small;
         }
 
     }

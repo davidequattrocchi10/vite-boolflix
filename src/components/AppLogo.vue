@@ -16,6 +16,7 @@ export default {
 .logo {
     font-size: larger;
     font-weight: bolder;
+    font-size: 2rem;
     color: var(--boolflix-red);
 
 }

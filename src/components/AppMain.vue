@@ -23,7 +23,6 @@ export default {
 <template>
     <main>
         <div class="container">
-
             <!-- Loader until first search -->
             <div class="row" v-if="!state.loading">
                 <div v-if="state.error" class="try-again"> Try another search</div>
@@ -41,7 +40,7 @@ export default {
 <style scoped>
 main {
     background-color: var(--boolflix-grey);
-    min-height: 200px;
+    min-height: 70vh;
 
     & .try-again {
         color: var(--boolflix-red);
