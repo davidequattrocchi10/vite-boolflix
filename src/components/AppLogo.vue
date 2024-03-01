@@ -1,7 +1,8 @@
 <script>
-export default {
-    name: 'AppLogo'
 
+
+export default {
+    name: 'AppLogo',
 }
 </script>
 

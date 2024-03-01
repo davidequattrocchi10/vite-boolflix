@@ -1,4 +1,7 @@
 <script>
+import { state } from '../store';
+import ActorsFilmsTv from './ActorsFilmsTV.vue'
+
 
 export default {
     name: 'FilmSeriesTv',
@@ -10,7 +13,7 @@ export default {
         return {
             base_images_url: 'https://image.tmdb.org/t/p/',
             size_images: 'w342',
-            hover: false,
+            state
         }
     },
     methods: {
@@ -52,14 +55,22 @@ export default {
                 return 'flag-icon flag-icon-unknown';
             }
         },
+        getVuoteActors() {
+            state.actors = [];
+            state.gone = true
+        }
+    },
+    components: {
+        ActorsFilmsTv
     }
+
 }
 
 </script>
 
 <template>
     <div class="col">
-        <div class="card">
+        <div class="card" @mouseleave="this.getVuoteActors()">
             <div>
                 <img v-if="element.poster_path == null"
                     src="https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-thumbnail-graphic-illustration-vector-png-image_40966590.jpg"
@@ -69,28 +80,28 @@ export default {
             <div class="card-hide">
                 <ul>
                     <li v-if="index === 'films'">
-                        <h3>
-                            Title: {{ element.title }}
-                        </h3>
-                        <h3 v-show="element.title != element.original_title">
-                            Original title: {{ element.original_title }}
-                        </h3>
+                        <h4>
+                            TITLE: {{ element.title }}
+                        </h4>
+                        <h4 v-show="element.title != element.original_title">
+                            ORIGINAL TITLE: {{ element.original_title }}
+                        </h4>
 
                     </li>
                     <li v-else>
-                        <h3>
-                            Title: {{ element.name }}
-                        </h3>
-                        <h3 v-show="element.name != element.original_name">
-                            Original title: {{ element.original_name }}
-                        </h3>
+                        <h4>
+                            TITLE: {{ element.name }}
+                        </h4>
+                        <h4 v-show="element.name != element.original_name">
+                            ORIGINAL TITLE: {{ element.original_name }}
+                        </h4>
                     </li>
                     <li class="stars">
-                        <h3 style="padding-right:0.5rem;"> Language: </h3>
+                        <h4 style="padding-right:0.5rem;"> LANGUAGE: </h4>
                         <div :class="getFlagClass(element.original_language)"> </div>
                     </li>
                     <li class="stars">
-                        <h3 style="padding-right:0.5rem;"> Vote: </h3>
+                        <h4 style="padding-right:0.5rem;"> VOTE: </h4>
                         <div v-for=" i in 5" :key="i">
                             <i v-if="Math.round(element.vote_average / 2) >= i" class="fa-solid fa-star"
                                 style="padding-right: 0.5rem;"></i>
@@ -98,7 +109,10 @@ export default {
                         </div>
                     </li>
                     <li>
-                        <h3> Overview: {{ element.overview.substring(0, 300) }} ... </h3>
+                        <h4> OVERVIEW: {{ element.overview.substring(0, 150) }} ... </h4>
+                    </li>
+                    <li>
+                        <ActorsFilmsTv :id="element.id" :index="index"></ActorsFilmsTv>
                     </li>
                 </ul>
             </div>
@@ -110,6 +124,19 @@ export default {
 
 
 <style scoped>
+ul {
+    >li {
+        list-style: none;
+        padding: 0.4rem;
+
+        >h4 {
+            font-size: medium;
+            padding: 0.4rem 0;
+        }
+
+    }
+}
+
 .card {
     position: relative;
     min-width: 100%;
@@ -121,12 +148,10 @@ export default {
         & img {
             width: 100%;
             min-height: 100%;
+            transition: opacity 1s ease-in-out;
         }
 
     }
-
-
-
 
 }
 
@@ -136,37 +161,23 @@ export default {
 
 .card-hide {
     position: absolute;
-    display: none;
+    transition: opacity 1s ease-in-out;
+    opacity: 0;
     height: 80%;
     width: 100%;
     padding: 5px;
     top: 8px;
     left: 0;
-
 }
 
 .card:hover .card-hide {
-    display: block;
-    /* @mouseover="showInfo" @mouseleave="hideInfo" */
+    opacity: 1;
 }
 
 .stars {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-}
-
-ul {
-    >li {
-        list-style: none;
-        padding: 0.5rem;
-
-        >h3 {
-            font-size: large;
-            padding: 0.5rem 0;
-        }
-
-    }
 }
 
 .flag-icon-unknown {

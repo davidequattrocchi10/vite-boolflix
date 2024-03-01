@@ -12,6 +12,10 @@ export const state = reactive({
     },
     loading: true,
     error: false,
+    base_url: "https://api.themoviedb.org/3/",
+    key_actors: "/credits?api_key=8aaf5d0c9dbcf9bd205fd6476fe7f4bf",
+    actors: [],
+    gone: true,
 
     //action
     getFilms(url) {
@@ -20,5 +24,4 @@ export const state = reactive({
     getSeriesTv(url) {
         return axios.get(url)
     }
-
 })

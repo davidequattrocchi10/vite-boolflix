@@ -8,7 +8,6 @@ export default {
         FilmSeriesTv
     }
 }
-
 </script>
 
 <template>
