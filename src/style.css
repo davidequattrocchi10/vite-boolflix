@@ -25,7 +25,6 @@ body {
     .row {
         display: flex;
         flex-wrap: wrap;
-        /* justify-content: space-between; */
 
         [class^="col"] {
             margin: 1rem 5px;
@@ -33,6 +32,14 @@ body {
             border: 0.5px solid var(--boolflix-red);
         }
 
+    }
+
+    & li {
+        font-size: 20px;
+    }
+
+    & h4 {
+        font-size: 22px;
     }
 
     @media (min-width:768px) {
@@ -44,6 +51,15 @@ body {
 
             width: 48%;
         }
+
+        & li {
+            font-size: 11px;
+        }
+
+        & h4 {
+            font-size: 13px;
+        }
+
     }
 
     @media (min-width:1200px) {
@@ -53,6 +69,14 @@ body {
             width: calc(97% / 3);
         }
 
+        & li {
+            font-size: 13px;
+        }
+
+        & h4 {
+            font-size: 15px;
+        }
+
     }
 
     @media (min-width:1600px) {
@@ -60,6 +84,14 @@ body {
 
         & .row .col {
             width: calc(97% / 4);
+        }
+
+        & li {
+            font-size: 15px;
+        }
+
+        & h4 {
+            font-size: 17px;
         }
 
     }

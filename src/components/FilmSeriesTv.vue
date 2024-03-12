@@ -69,56 +69,58 @@ export default {
 </script>
 
 <template>
-    <div class="col">
+    <div v-if="state.filter(element.genre_ids)" class="col">
         <div class="card" @mouseleave="this.getVuoteActors()">
-            <div>
-                <img v-if="element.poster_path == null"
-                    src="https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-thumbnail-graphic-illustration-vector-png-image_40966590.jpg"
-                    style="width: 100%;">
-                <img v-else :src="base_images_url + size_images + element.poster_path" alt="">
-            </div>
-            <div class="card-hide">
-                <ul>
-                    <li v-if="index === 'films'">
-                        <h4>
-                            TITLE: {{ element.title }}
-                        </h4>
-                        <h4 v-show="element.title != element.original_title">
-                            ORIGINAL TITLE: {{ element.original_title }}
-                        </h4>
+            <div >
+                <div>
+                    <img v-if="element.poster_path == null"
+                        src="https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-thumbnail-graphic-illustration-vector-png-image_40966590.jpg"
+                        style="width: 100%;">
+                    <img v-else :src="base_images_url + size_images + element.poster_path" alt="">
+                </div>
+                <div class="card-hide">
+                    <ul>
+                        <li v-if="index === 'films'">
+                            <h4>
+                                TITLE: {{ element.title }}
+                            </h4>
+                            <h4 v-show="element.title != element.original_title">
+                                ORIGINAL TITLE: {{ element.original_title }}
+                            </h4>
 
-                    </li>
-                    <li v-else>
-                        <h4>
-                            TITLE: {{ element.name }}
-                        </h4>
-                        <h4 v-show="element.name != element.original_name">
-                            ORIGINAL TITLE: {{ element.original_name }}
-                        </h4>
-                    </li>
-                    <li class="stars">
-                        <h4 style="padding-right:0.5rem;"> LANGUAGE: </h4>
-                        <div :class="getFlagClass(element.original_language)"> </div>
-                    </li>
-                    <li class="stars">
-                        <h4 style="padding-right:0.5rem;"> VOTE: </h4>
-                        <div v-for=" i in 5" :key="i">
-                            <i v-if="Math.round(element.vote_average / 2) >= i" class="fa-solid fa-star"
-                                style="padding-right: 0.5rem;"></i>
-                            <i v-else class="fa-regular fa-star" style="padding-right: 0.5rem;"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <h4> OVERVIEW: {{ element.overview.substring(0, 150) }} ... </h4>
-                    </li>
-                    <li>
-                        <ActorsFilmsTv :id="element.id" :index="index"></ActorsFilmsTv>
-                    </li>
-                </ul>
+                        </li>
+                        <li v-else>
+                            <h4>
+                                TITLE: {{ element.name }}
+                            </h4>
+                            <h4 v-show="element.name != element.original_name">
+                                ORIGINAL TITLE: {{ element.original_name }}
+                            </h4>
+                        </li>
+                        <li class="stars">
+                            <h4 style="padding-right:0.5rem;"> LANGUAGE: </h4>
+                            <div :class="getFlagClass(element.original_language)"> </div>
+                        </li>
+                        <li class="stars">
+                            <h4 style="padding-right:0.5rem;"> VOTE: </h4>
+                            <div v-for=" i in 5" :key="i">
+                                <i v-if="Math.round(element.vote_average / 2) >= i" class="fa-solid fa-star"
+                                    style="padding-right: 0.5rem;"></i>
+                                <i v-else class="fa-regular fa-star" style="padding-right: 0.5rem;"></i>
+                            </div>
+                        </li>
+                        <li>
+                            <h4> OVERVIEW: {{ element.overview.substring(0, 150) }} ... </h4>
+                        </li>
+                        <li>
+                            <ActorsFilmsTv :id="element.id" :index="index"></ActorsFilmsTv>
+                        </li>
+                    </ul>
+                </div>
             </div>
-
         </div>
     </div>
+    
 </template>
 
 
@@ -129,9 +131,8 @@ ul {
         list-style: none;
         padding: 0.4rem;
 
-        >h4 {
-            font-size: medium;
-            padding: 0.4rem 0;
+        >h4 {    
+            padding: 0.3rem 0;
         }
 
     }
