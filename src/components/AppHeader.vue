@@ -18,7 +18,7 @@ export default {
             const url_SeriesTv = state.base_api_url_series_tv + data;
 
             Promise
-                .all([state.getFilms(url_films), state.getSeriesTv(url_SeriesTv)])
+                .all([state.getMovieTV(url_films), state.getMovieTV(url_SeriesTv)])
                 .then(([films, seriesTv]) => {
                     state.results.films = films.data
                     state.results.seriesTv = seriesTv.data
