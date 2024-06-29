@@ -13,7 +13,7 @@ export default {
     },
     methods: {
         searchResults(data) {
-            
+
             const url_films = state.base_api_url_film + data;
             const url_SeriesTv = state.base_api_url_series_tv + data;
 
@@ -46,9 +46,8 @@ export default {
 
             <!-- Search -->
             <ResultsSearched @searched="searchResults"></ResultsSearched>
-
-
         </div>
+
     </header>
 </template>
 

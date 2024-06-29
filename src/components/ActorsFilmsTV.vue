@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         searchResultsActors() {
-            state.gone = false
+            state.gone = false;
             const url_actor_filmsTv = (this.index === 'films')
                 ? state.base_url + this.movie + this.id + state.key_actors
                 : state.base_url + this.tv + this.id + state.key_actors;
@@ -30,6 +30,7 @@ export default {
                 .catch(error => {
                     console.error(error);
                 })
+
         },
         searchResultsGenres() {
             state.gone = false
@@ -54,12 +55,12 @@ export default {
         Click here for other info
     </button>
     <div v-else>
-        <h4 >Actors: </h4>
-            <li v-for="actor in state.actors">
-                {{ actor.name }} 
-            </li>
+        <h4>Actors: </h4>
+        <li v-for="actor in state.actors">
+            {{ actor.name }}
+        </li>
         <h4>Genres: </h4>
-        <li v-for="genre in state.genres"> 
+        <li v-for="genre in state.genres">
             {{ genre.name }}
 
         </li>
@@ -73,5 +74,4 @@ h4 {
     padding: 0.3rem 0;
     text-decoration: underline;
 }
-
 </style>

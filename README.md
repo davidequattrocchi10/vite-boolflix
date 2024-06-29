@@ -1,7 +1,29 @@
-# Vue 3 + Vite
+# Boolflix
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Introduction
 
-## Recommended IDE Setup
+Boolflix is a web application that aims to replicate the layout and functionality of the popular streaming service Netflix. It utilizes the TMDb API to fetch movie data and present it in an intuitive and user-friendly interface.
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Features
+
+- **Search Functionality**: Users can search for movies by name or genre using the search bar.
+- **Dynamic Movie Cards**: Search results are displayed as cards with the movie's cover image.
+- **Hover Details**: Additional information about the movie (actors, language, overview) is displayed when hovering over a card.
+- **Responsive Layout**: The application is designed to be responsive and works well on various devices.
+
+## API Integration
+
+Boolflix uses The Movie Database (TMDb) API to fetch movie data. This includes movie titles, genres, cover images, actors, languages, and overviews.
+
+## Getting Started
+
+### Prerequisites
+
+- Vue.js and npm installed on your local machine
+
+### Installation
+
+1. **Clone the repository to your local machine**:
+   ```sh
+   git clone https://github.com/davidequattrocchi10/vite-boolflix.git
+
